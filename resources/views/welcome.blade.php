@@ -75,6 +75,11 @@
 
         <div class="flex-center position-ref full-height">
             <div class="top-left">
+
+                @if($tasks->count() > 0)
+                    <h4>Click task to view: </h4>
+                @endif
+
                 <div class="">
                     <a href="/post/create">
                         <button class="btn btn-primary btn-lg">Create a task</button>
@@ -95,6 +100,7 @@
                     @endauth
                 </div>
             @endif
+
 
 
             @if($tasks->count() < 1)

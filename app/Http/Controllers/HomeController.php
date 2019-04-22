@@ -25,4 +25,10 @@ class HomeController extends Controller
     {
         return view('home');
     }
+
+    public function start()
+    {
+        $tasks = \App\Post::orderBy('id', 'desc')->get();
+        return view('welcome', compact('tasks'));
+    }
 }

@@ -11,17 +11,15 @@
 |
 */
 
-Route::get('/', function () {
-//    $tasks = \App\Post::all();
-//        return $tasks;
-    $tasks = \App\Post::orderBy('id', 'desc')->get();
-    return view('welcome', compact('tasks'));
-});
-
+//Route::get('/', function () {
+////    $tasks = \App\Post::all();
+////        return $tasks;
+//});
 
 Route::resource('/post', 'PostsController');
 
-
 Auth::routes();
 
+Route::get('/', 'HomeController@start');
 Route::get('/home', 'HomeController@index')->name('home');
+
