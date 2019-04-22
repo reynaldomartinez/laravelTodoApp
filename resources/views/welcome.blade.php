@@ -14,7 +14,7 @@
         <!-- Styles -->
         <style>
             html, body {
-                background-color: #fff;
+                background-color: #F2F3F4;
                 color: #636b6f;
                 font-family: 'Nunito', sans-serif;
                 font-weight: 200;
@@ -37,9 +37,15 @@
             }
 
             .top-right {
+                 position: absolute;
+                 right: 10px;
+                 top: 18px;
+             }
+
+            .top-left {
                 position: absolute;
-                right: 10px;
-                top: 18px;
+                left: 100px;
+                top: 100px;
             }
 
             .content {
@@ -66,7 +72,16 @@
         </style>
     </head>
     <body>
+
         <div class="flex-center position-ref full-height">
+            <div class="top-left">
+                <div class="">
+                    <a href="/post/create">
+                        <button class="btn btn-primary btn-lg">Create a task</button>
+                    </a>
+                </div>
+
+            </div>
             @if (Route::has('login'))
                 <div class="top-right links">
                     @auth
@@ -81,11 +96,16 @@
                 </div>
             @endif
 
-                <div class="list-group">
-                    @foreach ($tasks as $task)
-                        <a href="#" class="list-group-item list-group-item-action">{{$task->post}}</a>
-                    @endforeach
-                </div>
+
+            @if($tasks->count() < 1)
+                <p>There are no tasks....</p>
+            @endif
+
+            <div class="list-group text-center text-capitalize">
+                @foreach ($tasks as $task)
+                    <a href="/post/{{$task->id}}" class="list-group-item list-group-item-action">{{$task->post}}</a>
+                @endforeach
+            </div>
 
         </div>
 

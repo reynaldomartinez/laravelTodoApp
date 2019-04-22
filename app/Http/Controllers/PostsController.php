@@ -15,9 +15,6 @@ class PostsController extends Controller
     public function index()
     {
         //
-        $tasks = Post::all();
-//        return $tasks;
-        return view('welcome', compact('tasks'));
     }
 
     /**
@@ -28,6 +25,8 @@ class PostsController extends Controller
     public function create()
     {
         //
+
+        return view('pages.create-post');
     }
 
     /**
@@ -39,6 +38,13 @@ class PostsController extends Controller
     public function store(Request $request)
     {
         //
+
+
+        $task = new Post();
+        $task->post = request('post');
+        $task->save();
+
+        return redirect('/');
     }
 
     /**
@@ -50,6 +56,12 @@ class PostsController extends Controller
     public function show(Post $post)
     {
         //
+//        dd(Post::findOrFail($post->id));
+        $singlePost = Post::findOrFail($post->id);
+
+//        dd($singlePost);
+
+        return view('pages.display-post', compact('singlePost'));
     }
 
     /**
@@ -61,6 +73,9 @@ class PostsController extends Controller
     public function edit(Post $post)
     {
         //
+        $posts = Post::find($post->id);
+//        dd($posts->id);
+        return view('pages.edit-post', compact('posts'));
     }
 
     /**
@@ -73,6 +88,12 @@ class PostsController extends Controller
     public function update(Request $request, Post $post)
     {
         //
+
+        $posts = Post::findOrFail($post->id);
+        $posts->post = request('post');
+        $posts->save();
+
+        return redirect('/');
     }
 
     /**
@@ -84,5 +105,10 @@ class PostsController extends Controller
     public function destroy(Post $post)
     {
         //
+
+        $deletePost = Post::findOrFail($post->id);
+        $deletePost->delete();
+
+        return redirect('/');
     }
 }

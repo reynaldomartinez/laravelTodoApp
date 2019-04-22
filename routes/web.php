@@ -11,11 +11,15 @@
 |
 */
 
-//Route::get('/', function () {
-//    return view('welcome');
-//});
+Route::get('/', function () {
+//    $tasks = \App\Post::all();
+//        return $tasks;
+    $tasks = \App\Post::orderBy('id', 'desc')->get();
+    return view('welcome', compact('tasks'));
+});
 
-Route::resource('/', 'PostsController');
+
+Route::resource('/post', 'PostsController');
 
 
 Auth::routes();
